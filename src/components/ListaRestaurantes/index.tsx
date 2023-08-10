@@ -18,7 +18,7 @@ export default function ListaRestaurantes() {
         setProximaPagina(response.data.next)
       })
       .catch(erro => {
-        console.log(erro)
+        alert(erro)
       })
   }
 
