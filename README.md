@@ -22,11 +22,17 @@ Se liga nessa lista de tudo que usaremos nesse treinamento:
 - `TypeScript`
 - `axios`
 
-## 🛠️ Abrir e rodar o projeto
+## 🛠️ Abrir e rodar o projeto - frontend
 
 Para abrir e rodar o projeto, execute npm i para instalar as dependências e npm start para inicar o projeto.
 
 Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
+
+## 🛠️ Abrir e rodar o projeto - backend (docker)
+
+Para abrir e rodar o projeto, abra a pasta "restaurantes_api" no terminal e execute o comando docker compose build para instalar as dependências e docker compose up para inicar o docker da aplicação.
+
+Depois, acesse <a href="http://0.0.0.0:8000/">http://0.0.0.0:8000/</a> no seu navegador.
 
 ## 📚 Mais informações do curso
 
