@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IPaginacao } from '../../interfaces/IPaginacao';
 import IRestaurante from '../../interfaces/IRestaurante';
-import style from './ListaRestaurantes.module.scss';
 import Restaurante from './Restaurante';
 
 export default function ListaRestaurantes() {
@@ -27,7 +26,7 @@ export default function ListaRestaurantes() {
   }, [])
 
   return (
-    <section className={style.ListaRestaurantes}>
+    <section className="mt-6 p-8">
       <h1>
         Os restaurantes mais <em>bacanas</em>!
       </h1>
