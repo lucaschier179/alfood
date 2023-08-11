@@ -10,11 +10,13 @@ export default function FormularioRestaurante() {
     axios.post("http://0.0.0.0:8000/api/v2/restaurantes/", {
       nome: nomeRestaurante
     })
-      .then(() => {
-        alert("Restaurante cadastrado com sucesso!")
+      .then((response) => {
+        const nomeRestauranteCadastrado = response.data.nome
+        alert(`${nomeRestauranteCadastrado} cadastrado com sucesso!`)
       })
-      .catch(erro => {
-        alert(erro)
+      .catch(error => {
+        const MensagemErro = error.response.data.nome
+        alert(MensagemErro)
       })
   }
 
