@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import AdministracaoRestaurantes from './pages/Administracao/Restaurantes/AdministracaoRestaurante';
-import FormularioRestaurante from './pages/Administracao/Restaurantes/FormularioRestaurante';
+import AdicionarRestaurante from './pages/Administracao/Restaurantes/AdicionarRestaurante';
+import AdministrarRestaurante from './pages/Administracao/Restaurantes/AdministrarRestaurante';
 import Home from './pages/Home';
 import VitrineRestaurantes from './pages/VitrineRestaurantes';
 
@@ -9,8 +9,9 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/restaurantes" element={<VitrineRestaurantes />} />
-      <Route path="/admin/restaurantes" element={<AdministracaoRestaurantes />} />
-      <Route path="/admin/restaurantes/novo" element={<FormularioRestaurante />} />
+      <Route path="/admin/restaurantes" element={<AdministrarRestaurante />} />
+      <Route path="/admin/restaurantes/novo" element={<AdicionarRestaurante />} />
+      <Route path="/admin/restaurantes/:id" element={<AdicionarRestaurante />} />
     </Routes>
   );
 }

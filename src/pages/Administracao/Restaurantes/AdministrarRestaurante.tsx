@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import IRestaurante from "../../../interfaces/IRestaurante"
 
-export default function AdministracaoRestaurantes() {
+export default function AdministrarRestaurante() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function AdministracaoRestaurantes() {
               Editar
             </TableCell>
           </TableRow>
-        </TableHead>
+        </TableHead> 
         <TableBody>
           {restaurantes.map(restaurante =>
             <TableRow key={restaurante.id}>

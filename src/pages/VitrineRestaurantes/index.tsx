@@ -1,10 +1,9 @@
-import React from 'react';
 import Banner from '../../components/Banner';
 import ListaRestaurantes from '../../components/ListaRestaurantes';
 import NavBar from '../../components/NavBar';
 import Rodape from '../../components/Rodape';
 
-function App() {
+export default function App() {
   return (
     <>
       <NavBar />
@@ -14,5 +13,3 @@ function App() {
     </>
   );
 }
-
-export default App;
