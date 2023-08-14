@@ -1,9 +1,10 @@
+import { Button } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import { IPaginacao } from '../../interfaces/IPaginacao';
 import IRestaurante from '../../interfaces/IRestaurante';
 import Restaurante from './Restaurante';
-import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 
 export default function ListaRestaurantes() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
@@ -35,14 +36,23 @@ export default function ListaRestaurantes() {
         <Restaurante restaurante={item} key={item.id} />
       )}
       <div className="flex flex-row justify-between mt-8">
-        <button onClick={e => carregarDados(paginaAnterior)} disabled={!paginaAnterior} className="flex w-44 p-2 items-center justify-between rounded-lg border-4 border-big-stone-700 text-white bg-big-stone-950 disabled:opacity-70">
-          <GoArrowLeft size={25} />
+        <Button
+          onClick={e => carregarDados(paginaAnterior)}
+          disabled={!paginaAnterior}
+          startIcon={<GoArrowLeft size={25} />}
+          variant="contained"
+          color="info"
+          size='large'>
           Página Anterior
-        </button>
-        <button onClick={e => carregarDados(proximaPagina)} disabled={!proximaPagina} className="flex w-44 p-2 items-center justify-between rounded-lg border-4 border-big-stone-700 text-white bg-big-stone-950 disabled:opacity-70">
-          Próxima Página
-          <GoArrowRight size={25} />
-        </button>
+        </Button>
+        <Button
+          onClick={e => carregarDados(proximaPagina)}
+          disabled={!proximaPagina}
+          startIcon={<GoArrowRight size={25} />}
+          variant="contained"
+          color="info">
+          Página Página
+        </Button>
       </div>
     </section>
   )
