@@ -1,11 +1,14 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import IRestaurante from "../../../interfaces/IRestaurante"
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { GoTrash } from "react-icons/go";
+import { MdOutlineEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
+import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function AdministrarRestaurante() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
+
 
   useEffect(() => {
     axios.get<IRestaurante[]>("http://0.0.0.0:8000/api/v2/restaurantes/")
@@ -15,7 +18,15 @@ export default function AdministrarRestaurante() {
       .catch(erro => {
         setRestaurantes(erro)
       })
-  }, [])
+  }, [restaurantes])
+
+  function deletarRestaurante(restaurante: IRestaurante) {
+    axios.delete(`http://0.0.0.0:8000/api/v2/restaurantes/${restaurante.id}/`)
+    .then(() => setRestaurantes)
+    .catch((error) => {
+      setRestaurantes(error)
+    })
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -28,8 +39,9 @@ export default function AdministrarRestaurante() {
             <TableCell>
               Editar
             </TableCell>
+            <TableCell />
           </TableRow>
-        </TableHead> 
+        </TableHead>
         <TableBody>
           {restaurantes.map(restaurante =>
             <TableRow key={restaurante.id}>
@@ -37,9 +49,16 @@ export default function AdministrarRestaurante() {
                 {restaurante.nome}
               </TableCell>
               <TableCell>
-                <Link to={`/admin/restaurantes/${restaurante.id}`}>
-                  Editar
-                </Link>
+                <IconButton color="info" title="Editar restaurante">
+                  <Link to={`/admin/restaurantes/${restaurante.id}`}>
+                    <MdOutlineEdit size={22} />
+                  </Link>
+                </IconButton>
+              </TableCell>
+              <TableCell>
+                <IconButton color="error" title="Excluir restaurante" onClick={() => deletarRestaurante(restaurante)}>
+                  <GoTrash size={22} />
+                </IconButton>
               </TableCell>
             </TableRow>
           )}
