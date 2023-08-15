@@ -9,9 +9,12 @@ import IRestaurante from "../../../interfaces/IRestaurante";
 export default function AdministrarRestaurante() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
 
-
   useEffect(() => {
-    axios.get<IRestaurante[]>("http://0.0.0.0:8000/api/v2/restaurantes/")
+    axios.get<IRestaurante[]>("http://0.0.0.0:8000/api/v2/restaurantes/", {
+      params: {
+        ordering: "nome",
+      }
+    })
       .then(response =>
         setRestaurantes(response.data)
       )
@@ -22,10 +25,10 @@ export default function AdministrarRestaurante() {
 
   function deletarRestaurante(restaurante: IRestaurante) {
     axios.delete(`http://0.0.0.0:8000/api/v2/restaurantes/${restaurante.id}/`)
-    .then(() => setRestaurantes)
-    .catch((error) => {
-      setRestaurantes(error)
-    })
+      .then(() => setRestaurantes)
+      .catch((error) => {
+        setRestaurantes(error)
+      })
   }
 
   return (
