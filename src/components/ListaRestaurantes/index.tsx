@@ -1,4 +1,4 @@
-import { Button, IconButton } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
@@ -18,6 +18,7 @@ export default function ListaRestaurantes() {
   const [paginaAnterior, setPaginaAnterior] = useState('')
   const [proximaPagina, setProximaPagina] = useState('')
   const [busca, setBusca] = useState('')
+  const [ordenacao, setOrdenacao] = useState('')
 
   function carregarDados(url: string, opcoes: AxiosRequestConfig = {}) {
     http.get<IPaginacao<IRestaurante>>(url, opcoes)
@@ -41,6 +42,9 @@ export default function ListaRestaurantes() {
     if (busca) {
       opcoes.params.search = busca
     }
+    if (ordenacao) {
+      opcoes.params.ordering = ordenacao
+    }
     carregarDados('http://localhost:8000/api/v1/restaurantes/', opcoes)
   }
 
@@ -53,13 +57,38 @@ export default function ListaRestaurantes() {
       <h1 className="mb-8 text-3xl font-bold">
         Os restaurantes mais <em>bacanas</em>!
       </h1>
-      <form onSubmit={buscar} className="flex flex-row items-center gap-2">
-        <input type="text" value={busca} placeholder="Buscar..." onChange={e => setBusca(e.target.value)} className="h-10 w-full p-2 rounded-md border border-big-stone-400 placeholder-stone-600" />
-        <Button variant="contained" type="submit">
-          <IconButton size="small" color="inherit" title="Pesquisar restaurante">
-            <MdSearch />
-          </IconButton>
-        </Button>
+      <form onSubmit={buscar} className="">
+        <div className="flex flex-col gap-4">
+          <label htmlFor="select-ordenação">Ordenação de Restaurantes</label>
+          <FormControl fullWidth>
+            <InputLabel id="select-label">
+              - Selecione um tipo de ordenação -
+            </InputLabel>
+            <Select
+              name="select-ordenação"
+              id="select-ordenação"
+              value={ordenacao}
+              onChange={e => setOrdenacao(e.target.value)}
+              label=" - Selecione um tipo de ordenação - "
+              labelId="select-label"
+              fullWidth
+            >
+              <MenuItem value="Padrão">
+                Padrão
+              </MenuItem>
+              <MenuItem value="id">
+                Por ID
+              </MenuItem>
+              <MenuItem value="nome">
+                Por Nome
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <input type="text" value={busca} placeholder="Buscar por restaurantes..." onChange={e => setBusca(e.target.value)} className="h-14 w-full p-2 rounded-md border border-big-stone-400 placeholder-stone-600" />
+          <Button variant="contained" type="submit" fullWidth endIcon={<MdSearch color="inherit" title="Pesquisar restaurante" />}>
+            Pesquisar
+          </Button>
+        </div>
       </form>
       {restaurantes?.map(item =>
         <Restaurante restaurante={item} key={item.id} />
