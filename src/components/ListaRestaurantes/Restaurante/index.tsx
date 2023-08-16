@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import IPrato from '../../../interfaces/IPrato';
 import IRestaurante from '../../../interfaces/IRestaurante';
+import http from '../../http';
 import Prato from '../Prato';
 
 interface RestauranteProps {
@@ -12,7 +12,7 @@ export default function Restaurante({ restaurante }: RestauranteProps) {
   const [pratos, setPratos] = useState<IPrato[]>()
 
   useEffect(() => {
-    axios.get<IPrato[]>(`http://localhost:8000/api/v1/restaurantes/${restaurante.id}/pratos/`)
+    http.get<IPrato[]>(`http://localhost:8000/api/v1/restaurantes/${restaurante.id}/pratos/`)
       .then(response => {
         setPratos(response.data)
       })

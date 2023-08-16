@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import http from "../../../components/http";
 import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function AdicionarRestaurante() {
@@ -10,7 +10,7 @@ export default function AdicionarRestaurante() {
 
   useEffect(() => {
     if (parametros.id) {
-      axios.get<IRestaurante>(`http://0.0.0.0:8000/api/v2/restaurantes/${parametros.id}/`)
+      http.get<IRestaurante>(`restaurantes/${parametros.id}/`)
         .then(response => setNomeRestaurante(response.data.nome))
     }
   }, [parametros])
@@ -21,7 +21,7 @@ export default function AdicionarRestaurante() {
     e.preventDefault()
 
     if (parametros.id) {
-      axios.put(`http://0.0.0.0:8000/api/v2/restaurantes/${parametros.id}/`, {
+      http.put(`restaurantes/${parametros.id}/`, {
         nome: nomeRestaurante
       })
         .then((response) => {
@@ -32,8 +32,8 @@ export default function AdicionarRestaurante() {
           const MensagemErro = error.response.data.nome
           alert(MensagemErro)
         })
-    } else {
-      axios.post("http://0.0.0.0:8000/api/v2/restaurantes/", {
+      } else {
+      http.post("restaurantes/", {
         nome: nomeRestaurante
       })
         .then((response) => {
@@ -44,8 +44,8 @@ export default function AdicionarRestaurante() {
           const MensagemErro = error.response.data.nome
           alert(MensagemErro)
         })
+      }
     }
-  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

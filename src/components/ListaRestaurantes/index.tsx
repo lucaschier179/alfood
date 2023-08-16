@@ -1,10 +1,11 @@
 import { Button, IconButton } from '@mui/material';
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import { MdSearch } from 'react-icons/md';
 import { IPaginacao } from '../../interfaces/IPaginacao';
 import IRestaurante from '../../interfaces/IRestaurante';
+import http from '../http';
 import Restaurante from './Restaurante';
 
 interface IParametrosBusca {
@@ -19,7 +20,7 @@ export default function ListaRestaurantes() {
   const [busca, setBusca] = useState('')
 
   function carregarDados(url: string, opcoes: AxiosRequestConfig = {}) {
-    axios.get<IPaginacao<IRestaurante>>(url, opcoes)
+    http.get<IPaginacao<IRestaurante>>(url, opcoes)
       .then(response => {
         setRestaurantes(response.data.results)
         setPaginaAnterior(response.data.previous)

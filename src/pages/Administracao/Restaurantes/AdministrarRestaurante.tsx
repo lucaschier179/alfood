@@ -1,16 +1,16 @@
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { MdOutlineEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import http from "../../../components/http";
 import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function AdministrarRestaurante() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
 
   useEffect(() => {
-    axios.get<IRestaurante[]>("http://0.0.0.0:8000/api/v2/restaurantes/", {
+    http.get<IRestaurante[]>("restaurantes/", {
       params: {
         ordering: "nome",
       }
@@ -24,7 +24,7 @@ export default function AdministrarRestaurante() {
   }, [restaurantes])
 
   function deletarRestaurante(restaurante: IRestaurante) {
-    axios.delete(`http://0.0.0.0:8000/api/v2/restaurantes/${restaurante.id}/`)
+    http.delete(`restaurantes/${restaurante.id}/`)
       .then(() => setRestaurantes)
       .catch((error) => {
         setRestaurantes(error)
