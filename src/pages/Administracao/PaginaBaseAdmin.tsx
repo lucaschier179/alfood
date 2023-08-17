@@ -2,7 +2,6 @@ import { AppBar, Box, Button, Container, Link, Paper, Toolbar, Typography } from
 import { Outlet, Link as RouterLink } from "react-router-dom";
 
 export default function PaginaBaseAdmin() {
-
   return (
     <>
       <AppBar position="static">

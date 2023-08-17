@@ -5,7 +5,6 @@ import http from "../../../components/http";
 import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function AdicionarRestaurante() {
-
   const parametros = useParams()
 
   useEffect(() => {
@@ -52,7 +51,6 @@ export default function AdicionarRestaurante() {
       <Typography component="h1" variant="h6">Adicionar Restaurantes</Typography>
       <Box sx={{ width: "100%" }} component="form" onSubmit={handleFormSubmit}>
         <TextField
-          id="standard-basic"
           label="Nome do Restaurante"
           variant="standard"
           value={nomeRestaurante}
