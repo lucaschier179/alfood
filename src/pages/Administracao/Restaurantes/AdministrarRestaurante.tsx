@@ -52,11 +52,11 @@ export default function AdministrarRestaurante() {
                 {restaurante.nome}
               </TableCell>
               <TableCell>
-                <IconButton color="info" title="Editar restaurante">
-                  <Link to={`/admin/restaurantes/${restaurante.id}`}>
+                <Link to={`/admin/restaurantes/${restaurante.id}`}>
+                  <IconButton color="info" title="Editar restaurante">
                     <MdOutlineEdit size={22} />
-                  </Link>
-                </IconButton>
+                  </IconButton>
+                </Link>
               </TableCell>
               <TableCell>
                 <IconButton color="error" title="Excluir restaurante" onClick={() => deletarRestaurante(restaurante)}>

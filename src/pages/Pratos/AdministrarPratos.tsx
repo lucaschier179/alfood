@@ -64,11 +64,11 @@ export default function AdministrarPratos() {
                 </a>
               </TableCell>
               <TableCell>
-                <IconButton color="info" title="Editar prato">
-                  <Link to={`/admin/pratos/${prato.id}`}>
+                <Link to={`/admin/pratos/${prato.id}`}>
+                  <IconButton color="info" title="Editar prato">
                     <MdOutlineEdit size={22} />
-                  </Link>
-                </IconButton>
+                  </IconButton>
+                </Link>
               </TableCell>
               <TableCell>
                 <IconButton color="error" title="Excluir prato" onClick={() => deletarPratos(prato)}>
