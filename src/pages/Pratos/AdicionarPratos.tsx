@@ -19,12 +19,14 @@ export default function AdicionarPratos() {
     http.get<{ tags: ITag[] }>("tags/")
       .then(response => setTags(response.data.tags))
       .catch(error => {
-        alert(error)
+        console.log(error.response.data.nome)
+        alert(error.response.data.nome)
       })
     http.get<IRestaurante[]>("restaurantes/")
       .then(response => setRestaurantes(response.data))
       .catch(error => {
-        alert(error)
+        console.log(error.response.data.nome)
+        alert(error.response.data.nome)
       })
   }, [])
 
@@ -36,8 +38,33 @@ export default function AdicionarPratos() {
     }
   }
 
-  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function limparFormulario() {
+    setNomePrato("")
+    setDescricaoPrato("")
+    setTag("")
+    setRestaurante("")
+    setImagemPrato(null)
+  }
+
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formData = new FormData()
+    formData.append("nome", nomePrato)
+    formData.append("descricao", descricaoPrato)
+    if (imagemPrato) {
+      formData.append("imagem", imagemPrato)
+    }
+    formData.append("tag", tag)
+    formData.append("restaurante", restaurante)
+    await http.post("pratos/", formData)
+      .then((res) => {
+        limparFormulario()
+        alert("Prato cadastrado com sucesso!")
+      })
+      .catch((error) => {
+        alert(error.response.data.nome)
+        console.log(error.response.data.nome)
+      })
   }
 
   return (
@@ -72,7 +99,7 @@ export default function AdicionarPratos() {
           <Select labelId="select-tag" value={tag} onChange={e => setTag(e.target.value)}>
             {
               tags.map(tag => (
-                <MenuItem key={tag.id} value={tag.id}>
+                <MenuItem key={tag.id} value={tag.value}>
                   {tag.value}
                 </MenuItem>
               ))
